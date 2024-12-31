@@ -5,6 +5,7 @@
 /* run this program using the console pauser or add your own getch, system("pause") or input loop */
 
 int main(int argc, char *argv[]) {
+	int ch;
  	int choice;
     int subChoice;
     int n = 1;
@@ -13,6 +14,7 @@ int main(int argc, char *argv[]) {
     };
 
     do {
+    	system("cls");
         printMenu();
         printf("\nENTER THE CHOICE: ");
         scanf("%d", &choice);
@@ -20,20 +22,50 @@ int main(int argc, char *argv[]) {
             case 1:
                 break;
             case 2:
+            	back:
+            	system("cls");
                 printMenuStudent();
                 printf("\tEnter the Choice: ");
                 scanf("%d", &subChoice);
                 switch (subChoice){
                     case 1:
+                    	system("cls");
                         addStudent(students, &n);
-                        printListInformation(students, n); 
+                        printListInformation(students, n);
+						printf("Go back(b) or Exit(any): ");
+						scanf("%c", &ch);
+						getchar();
+						if(ch='b'){
+							goto back;
+						}else{
+							subChoice=0;
+						} 
                         break;
                     case 2:
+                    	system("cls");
                         printListInformation(students, n);
+                        printf("Go back(b) or Exit(any): ");
+						scanf("%c", &ch);
+						getchar();
+						if(ch='b'){
+							goto back;
+						}else{
+							subChoice=0;
+						}
                         break;
                     case 3:
                         break;
                     case 4:
+                    	system("cls");
+                    	editInformation(students, n);
+                    	printf("Go back(b) or Exit(any): ");
+						scanf("%c", &ch);
+						getchar();
+						if(ch='b'){
+							goto back;
+						}else{
+							subChoice=0;
+						}
                         break;
                     case 5:
                         break;
