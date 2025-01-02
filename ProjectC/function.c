@@ -24,26 +24,26 @@ void printMenuStudent(){
 	printf("[3]  Search A Student\n");
 	printf("[4]  Edit A Student\n");
 	printf("[5]  Delete A student\n");
+	printf("[6]  Student arrangement\n");
 	printf("[0]  Exit the Program\n");
 	printf("\n=======================\n");
 }
 
 void printListInformation(struct Student students[], int n){
 
-	   	printf("|====|===========|==========|====================|===========|======|====================|==============|\n");
-	    printf("| ID | StudentId |  ClassId |       Name         | BirthDate |Gender|      Email         |    Phone     |\n");
-	    printf("|====|===========|==========|====================|===========|======|====================|==============|\n");
+	   	printf("|====|===========|====================|==========|======|====================|==============|\n");
+	    printf("| ID |  ClassId  |       Name         | BirthDate|Gender|      Email         |    Phone     |\n");
+	    printf("|====|===========|====================|==========|======|====================|==============|\n");
 	int i;
     for (i = 0; i < n; i++) {
-        printf("|%4d|%10s|%10s|%20s|%02d/%02d/%04d| %4s|%20s|%14s|\n",
-            i + 1, students[i].studentId, students[i].classroomId, students[i].name,
+        printf("|%4d|%11s|%20s|%02d/%02d/%04d| %5s|%20s|%14s|\n",
+            i + 1, students[i].classroomId, students[i].name,
             students[i].dateOfBirth.day, students[i].dateOfBirth.month, students[i].dateOfBirth.year,
             students[i].gender ? "Nam" : "Nu", students[i].email, students[i].phone);
-    	printf("|----|----------|----------|--------------------|------------|------|--------------------|--------------|\n");
+    	printf("|----|-----------|--------------------|----------|------|--------------------|--------------|\n");
     }
-    	printf("|====|==========|==========|====================|============|======|====================|==============|\n");
+    	printf("|====|===========|====================|==========|======|====================|==============|\n");
 }
-
 
 void addStudent(struct Student students[100], int *n){
 	if(*n<100){
@@ -55,6 +55,7 @@ void addStudent(struct Student students[100], int *n){
     	printf("Danh sach sinh vien da day!\n");
 	}
 }
+
 void addInformation(struct Student *std) {
     fflush(stdin);
     	printf("Nhap ma sinh vien: ");
@@ -82,6 +83,7 @@ void addInformation(struct Student *std) {
     fgets(std->password, sizeof(std->password), stdin);
     std->password[strcspn(std->password, "\n")] = '\0';
 }
+
 void editInformation(struct Student students[50], int count) {
     system("cls");
     int found = 0;
@@ -91,10 +93,9 @@ void editInformation(struct Student students[50], int count) {
     scanf("%s", id);
     getchar();
     for (i = 0; i < count; i++) {
-        if (strcmp(students[i].studentId, id) == 0) {
+        if (strcmp(students[i].studentId, id) == 0){
             found = 1;
             printf("Thong tin cua sinh vien ID %s:\n", id);
-            printf("ID: %s\n", students[i].studentId);
             printf("Ma lop hoc: %s\n", students[i].classroomId);
             printf("Ten: %s\n", students[i].name);
             printf("Email: %s\n", students[i].email);
@@ -126,3 +127,49 @@ void editInformation(struct Student students[50], int count) {
     }
 }
 
+void deleteStudent(struct Student students[50], int *n) {
+    int i;
+    int j;
+    char id[10];
+    int found = 0;
+    int choice;
+    printf("Nhap ID sinh vien can xoa: ");
+    scanf("%s", &id);
+    for (i = 0; i < *n; i++) {
+        if (strcmp(students[i].studentId, id) == 0){
+            found = 1;
+            printf("Xac nhan xoa thong tin(1.Dong y): ");
+            scanf("%d", &choice);
+            if (choice == 1){
+                for (j = i; j < *n - 1; j++){
+                    students[j] = students[j + 1];
+                }
+                (*n)--;
+                printf("Xoa thanh cong!!\n");
+                break;
+            }else{
+                printf("Xac nhan that bai\n");
+                found = 0;
+            }
+        }
+    }
+    if (!found){
+        printf("Khong tim thay ID can xoa!!\n");
+    }
+}
+
+void bubbleSortStudent(struct Student students[50], int n){
+    struct Student temp;
+    int i;
+    int j;
+    for (i = 0; i < n - 1; i++) {
+        for (j = 0; j < n - 1 - i; j++) {
+            if (strcmp(students[j].name, students[j + 1].name) > 0){
+                temp = students[j];
+                students[j] = students[j + 1];
+                students[j + 1] = temp;
+            }
+        }
+    }
+    printf("Danh sach sinh vien da duoc sap xep thanh cong!!!\n");
+}

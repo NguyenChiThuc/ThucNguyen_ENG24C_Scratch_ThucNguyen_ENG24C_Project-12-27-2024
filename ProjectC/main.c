@@ -10,7 +10,7 @@ int main(int argc, char *argv[]) {
     int subChoice;
     int n = 1;
     struct Student students[100] = {
-        {"1", "ENG24C", "ThucNguyen", {6, 5, 2006}, true, "nct@gmail.com", "123456789", "123456"},
+        {"0", "ENG24C", "ThucNguyen", {6, 5, 2006}, true, "nct@gmail.com", "123456789", "123456"},
     };
 
     do {
@@ -68,6 +68,27 @@ int main(int argc, char *argv[]) {
 						}
                         break;
                     case 5:
+                    	system("cls");
+                    	deleteStudent(students, &n);
+                    	printf("Go back(b) or Exit(any): ");
+						scanf("%c", &ch);
+						getchar();
+						if(ch='b'){
+							goto back;
+						}else{
+							subChoice=0;
+						}
+					case 6:
+						system("cls");
+                    	bubbleSortStudent(students, n);
+                    	printf("Go back(b) or Exit(any): ");
+						scanf("%c", &ch);
+						getchar();
+						if(ch='b'){
+							goto back;
+						}else{
+							subChoice=0;
+						}
                         break;
                     case 0:
                         break;
