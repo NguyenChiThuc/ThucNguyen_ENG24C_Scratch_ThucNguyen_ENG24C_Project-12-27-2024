@@ -1,37 +1,37 @@
-#include<stdbool.h>
+#ifndef DATATYPE_H
+#define DATATYPE_H
 
-	struct Date{
-		int month, day, year;
-	};
-	
-	struct Student{
-		char studentId[10];
-		char classroomId[10];
-		char name[20];
-		struct Date dateOfBirth;
-		bool gender;
-		char email[30];
-		char phone[20];
-		char password[20];
-	};
-	
-	struct Classroom{
-		char classroomId[10];
-		char teacherId[10];
-		char classroomName[10];
-		struct Student students[];
-	};
-	
-	struct Teacher{
-		char teacherId[10];
-		char classroomId[10];
-		char Name[20];
-		struct Date dateOfBirth;
-		bool gender;
-		char Email[30];
-		char phonr[20];
-		char password[20];
-		struct Classroom classrooms[];
-	};
-	
+#include <stdbool.h>
+
+// Date structure
+struct Date {
+    int day;
+    int month;
+    int year;
+};
+
+// Student structure
+struct Student {
+    char id[10];
+    char course[10];
+    char name[50];
+    struct Date birthdate;
+    bool gender;  // true for male, false for female
+    char email[50];
+    char phone[15];
+    char password[50];
+};
+
+// Function declarations
+void printMenu();
+void printMenuStudent();
+void printInformation(struct Student students);
+void printListInformation(struct Student students[], int n);
+void addStudent(int *length, struct Student sv[]);
+void addInformation(struct Student *std);
+void editInformation(struct Student students[], int count);
+void deleteStudent(struct Student students[], int *n);
+void bubblesortStudent(struct Student students[], int n);
+
+#endif // DATATYPE_H
 
